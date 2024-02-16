@@ -18,53 +18,38 @@ const questions = [
   {
     type: 'input',
     name: 'view_all_departments',
-    message: 'View all departments:',
+    message: 'View All Departments:',
   },
   {
     type: 'input',
     name: 'view_all_roles',
-    message: 'View all roles:',
+    message: 'View All Roles:',
   },
   {
     type: 'input',
-    name: 'toc',
-    message: 'Table of contents(press enter):',
+    name: 'view_all_employees',
+    message: 'View all Employees:',
   },
   {
     type: 'input',
-    name: 'installation',
-    message: 'Installation steps:',
+    name: 'add_a_department',
+    message: 'Add a Department:',
   },
   {
     type: 'input',
-    name: 'usage',
-    message: 'How to use:',
+    name: 'add_a_role',
+    message: 'Add a Role:',
   },
   {
     type: 'list',
-    name: 'license',
-    message: 'License:',
+    name: 'add_an_employee',
+    message: 'Add an Emplyee:',
     choices: ['MIT', 'APACHEv2.0', 'GPLv3.0', 'None'],
   },
   {
     type: 'input',
-    name: 'contributing',
-    message: 'Contributing guidelines:',
-  },
-  {
-    type: 'input',
-    name: 'tests',
-    message: 'Tests:',
-  },
-  {
-    type: 'input',
-    name: 'questions',
-    message: 'What is your git username?',
-  },
-  {
-    type: 'input',
-    name: 'email',
-    message: 'What is your email?',
+    name: 'update_employee_role',
+    message: 'Update an Employee Role:',
   },
 ];
 
