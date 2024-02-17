@@ -15,9 +15,13 @@ CREATE TABLE role (
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
  title VARCHAR(30),
  salary DECIMAL,
- department_id INT, 
- FOREIGN KEY ()
+ department_id INT,
+ FOREIGN KEY (department_id INT,) REFERENCES department(id)
 );
+
+-- FOREIGN KEY (teacher_id) REFERENCES teachers(id),
+--     student_id INT,
+--     FOREIGN KEY (student_id) REFERENCES student(id)
 
 CREATE TABLE department (
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
