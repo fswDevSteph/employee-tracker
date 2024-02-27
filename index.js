@@ -13,12 +13,11 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the employees_db database.`)
 );
-//This will be questions: HEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
-
+//Menu screen : first "Then" of the user story
 const question = [
   {
     type: 'list',
-    name: 'doWhat',
+    name: 'doWhat', //profesh wordinng: name of the return value which is whatever the user selects
     message: 'What would you like to do?',
     choices: [
       'View All Departments',
@@ -32,47 +31,10 @@ const question = [
   },
 ];
 
-const questions = [
-  {
-    type: 'input',
-    name: 'view_all_departments',
-    message: 'View All Departments:',
-  },
-  {
-    type: 'input',
-    name: 'view_all_roles',
-    message: 'View All Roles:',
-  },
-  {
-    type: 'input',
-    name: 'view_all_employees',
-    message: 'View all Employees:',
-  },
-  {
-    type: 'input',
-    name: 'add_a_department',
-    message: 'Add a Department:',
-  },
-  {
-    type: 'input',
-    name: 'add_a_role',
-    message: 'Add a Role:',
-  },
-  {
-    type: 'list',
-    name: 'add_an_employee',
-    message: 'Add an Emplyee:',
-    choices: ['MIT', 'APACHEv2.0', 'GPLv3.0', 'None'],
-  },
-  {
-    type: 'input',
-    name: 'update_employee_role',
-    message: 'Update an Employee Role:',
-  },
-];
 //function for when a selction is made
-function init() {
+function questionAnsweredThenWhat() {
   inquirer.prompt(question).then((answers) => {
+    //.then RECIEVES the return value of a promise and uses it as the arg value (answers)
     if (answers.doWhat == 'View All Departments') {
       console.log(answers);
       db.query('select * from department', (err, res) => {
@@ -86,5 +48,16 @@ function init() {
     }
   });
 }
+//example
+questionAnsweredThenWhat();
+// function addOne(number) {
+//   number++;
+//   return number;
+// }
 
-init();
+// let numeroUno = 1;
+
+// addOne(numerUno).then((numeroTwo) => {
+//   console.log(numerTwo);
+// });
+// let numeroThree = addOne(2);
