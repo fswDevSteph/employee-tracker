@@ -1,6 +1,6 @@
 const mysql = require('mysql2'); //requires mysql"2" which is a package and you can see that in package.json
 // mysql2 is a package for mysql database which allows us to communicate from here to the database
-
+const inquirer = require('inquirer');
 // Connect to database
 const db = mysql.createConnection(
   {
@@ -14,6 +14,16 @@ const db = mysql.createConnection(
   console.log(`Connected to the employees_db database.`)
 );
 //This will be questions: HEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
+
+const question = [
+  {
+    type: 'list',
+    name: 'doWhat',
+    message: 'What would you like to do?',
+    choices: ['View All Departments', 'View All Roles'],
+  },
+];
+
 const questions = [
   {
     type: 'input',
@@ -54,7 +64,19 @@ const questions = [
 ];
 
 function init() {
-  inquirer.prompt(questions);
+  inquirer.prompt(question).then((answers) => {
+    if (answers.doWhat == 'View All Departments') {
+      console.log(answers);
+      db.query('select * from department', (err, res) => {
+        console.table(res);
+      });
+    } else if (answers.doWhat == 'View All Roles') {
+      console.log(answers);
+      db.query('select * from role', (err, res) => {
+        console.table(res);
+      });
+    }
+  });
 }
 
 init();
