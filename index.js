@@ -70,7 +70,7 @@ const questions = [
     message: 'Update an Employee Role:',
   },
 ];
-
+//function for when a selction is made
 function init() {
   inquirer.prompt(question).then((answers) => {
     if (answers.doWhat == 'View All Departments') {
