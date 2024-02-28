@@ -20,13 +20,13 @@ const question = [
     name: 'doWhat', //profesh wordinng: name of the return value which is whatever the user selects
     message: 'What would you like to do?',
     choices: [
-      'View All Departments',
-      'View All Roles',
       'View All Employees',
-      'Add A Department',
-      'Add A Role',
       'Add A Employee',
       'Update an Employee Role',
+      'View All Roles',
+      'Add A Role',
+      'View All Departments',
+      'Add A Department',
     ],
   },
 ];
