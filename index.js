@@ -61,3 +61,8 @@ questionAnsweredThenWhat();
 //   console.log(numerTwo);
 // });
 // let numeroThree = addOne(2);
+//! 1. mysql terminal (open the integrated terminal)
+//! 2. ensure connection matches what mysql is
+//! 3. selct * from to check all tables are working 
+
+//! --create all the functions (theyre already started)
