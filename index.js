@@ -35,18 +35,34 @@ const question = [
 function questionAnsweredThenWhat() {
   inquirer.prompt(question).then((answers) => {
     //.then RECIEVES the return value of a promise and uses it as the arg value (answers)
-    if (answers.doWhat == 'View All Departments') {
-      console.log(answers);
+    if (answers.doWhat == 'View All Departments') { // checking condition
+     viewAllDepartments() //calling that function
+    } else if (answers.doWhat == 'View All Roles') {
+     viewAllRoles()
+    } else if (answers.doWhat == 'View All Employees') {
+      viewAllEmployees()
+    }
+
+  });
+}
+
+function viewAllDepartments () { 
       db.query('select * from department', (err, res) => {
         console.table(res);
       });
-    } else if (answers.doWhat == 'View All Roles') {
-      console.log(answers);
-      db.query('select * from role', (err, res) => {
+}
+
+function viewAllRoles () {
+  db.query('select * from role', (err, res) => {
         console.table(res);
       });
-    }
-  });
+}
+
+function viewAllEmployees () {
+  db.query('select employee.id, first_name, last_name, title, salary, departmentName FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id;', (err, res) => {
+        if(err) console.log(err)
+        console.table(res);
+      });
 }
 //example
 questionAnsweredThenWhat();
@@ -66,3 +82,31 @@ questionAnsweredThenWhat();
 //! 3. selct * from to check all tables are working 
 
 //! --create all the functions (theyre already started)
+
+// Functionality which involves adding data to table
+
+// WHEN I choose to add a department
+// THEN I am prompted to enter the name of the department and that department is added to the database
+// WHEN I choose to add a role
+// THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+// WHEN I choose to add an employee
+// THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+
+// Add an if-else statement in the main function
+// Create a function to add Employee
+// Call the addEmployee function inside the if-else statement
+// Inside addEmployee Function, you will create one more inquirer.prompt to ask the details of the employee to be added i.e first_name, last_name, role_id and manage_id
+// Make use of the insert command in the sql to insert data in the database
+
+
+// Functionality which involves updating already existing data to in the table
+
+// WHEN I choose to update an employee role
+// THEN I am prompted to select an employee to update and their new role and this information is updated in the database
+
+// Add an if-else statement in the main function
+// Create a function to update Employee
+// Call the updateEmployee function inside the if-else statement
+// Inside updateEmployee Function, you will create one more inquirer.prompt to ask the details of the employee to update
+// Make use of the update command in the sql to update data in the database
+
