@@ -78,16 +78,52 @@ questionAnsweredThenWhat();
 //   console.log(numerTwo);
 // });
 // let numeroThree = addOne(2);
-//! 1. mysql terminal (open the integrated terminal)
-//! 2. ensure connection matches what mysql is
-//! 3. selct * from to check all tables are working 
+//* 1. mysql terminal (open the integrated terminal)
+//* 2. ensure connection matches what mysql is
+//* 3. select * from to check all tables are working 
 
-//! --create all the functions (theyre already started)
+
 
 // Functionality which involves adding data to table
 
 // WHEN I choose to add a department
-// THEN I am prompted to enter the name of the department and that department is added to the database
+// THEN I am prompted to enter the name of the department and that department is added to the 
+//! Function to take department input
+function takeDepartmentInput() {
+    inquirer.prompt([
+        {
+            name: "departmentName",
+            type: "input",
+            message: "Enter the name of the department:"
+        }
+    ]).then((answer) => {
+        // Call the function to add department input to the database
+        addDepartmentToDatabase(answer.departmentName);
+    });
+}
+
+//! Function to add department input to the database
+function addDepartmentToDatabase(departmentName) {
+    const sql = 'INSERT INTO department (departmentName) VALUES (?)';
+    db.query(sql, [departmentName], (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(`Department '${departmentName}' added successfully!`);
+        }
+    });
+}
+inquirer.prompt(question).then((answers) => {
+        if (answers.doWhat === 'Add A Department') {
+            // Call the function to take department input
+            takeDepartmentInput();
+        } else {
+            // Handle other actions here
+            console.log("Not yet implemented.");
+        }
+    });
+
+
 // WHEN I choose to add a role
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
 // WHEN I choose to add an employee
