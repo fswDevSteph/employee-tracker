@@ -54,7 +54,8 @@ function viewAllDepartments () {
 
 function viewAllRoles () {
   db.query('select * from role', (err, res) => {
-        console.table(res);
+     if(err) console.log(err)    
+    console.table(res);
       });
 }
 
