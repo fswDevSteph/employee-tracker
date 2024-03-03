@@ -46,6 +46,8 @@ function questionAnsweredThenWhat() {
      takeDepartmentInput();
         } else if( answers.doWhat === 'Add A Role' ) {
           takeRoleInput();
+        } else if (answers.doWhat === 'Add A Employee') {
+           takeAddEmployeeInput();
         }
         else {
             // Handle other actions here
@@ -151,7 +153,8 @@ function takeRoleInput() {
 
 //! Function to add role input to the database
 function addRoleToDatabase(roleName, salary, departmentId) {
-    const sql = `INSERT INTO role (title, salary, department_id) VALUES ('${roleName}', '${salary}', '${departmentId}');`
+    const sql = `INSERT INTO role (title, salary, department_id) VALUES 
+    ('${roleName}', '${salary}', '${departmentId}');`
     db.query(sql,  (err, res) => {
         if (err) {
             console.log(err);
@@ -181,14 +184,27 @@ function takeAddEmployeeInput() {
             message: "Enter the employees role:"
         },
         {
-            name: "employeesManager",
+            name: "employeeManager",
             type: "input",
             message: "Enter the manager that the employee reports to:"
         }
     ]).then((answer) => {
       //!bottom of add an employee array of objects
         // Call the function to add employee input to the database
-        takeAddEmployeeInput(answer.firstName, answer.lastName, answer.employeeRole, answer.employeesManager);
+        takeAddEmployeeInput(answer.firstName, answer.lastName, answer.employeeRole, answer.employeeManager);
+    });
+}
+
+//! Function to add add employee data input to the database
+function takeAddEmployeeInput(firstName, lastName, employeeRole, employeeManager) {
+    const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES 
+    ('${firstName}', '${lastName}', '${employeeRole}', '${employeeManager});`
+    db.query(sql,  (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(`Role '${firstName}' added successfully!`);
+        }
     });
 }
 
