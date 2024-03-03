@@ -162,6 +162,35 @@ function addRoleToDatabase(roleName, salary, departmentId) {
 }
 // WHEN I choose to add an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+//! Function to take add employee  input
+function takeAddEmployeeInput() {
+    inquirer.prompt([
+        {
+            name: "firstName",
+            type: "input",
+            message: "Enter the employees first name:"
+        },
+        {
+            name: "lastName",
+            type: "input",
+            message: "Enter the employees last name:"
+        },
+        {
+            name: "employeeRole",
+            type: "input",
+            message: "Enter the employees role:"
+        },
+        {
+            name: "employeesManager",
+            type: "input",
+            message: "Enter the manager that the employee reports to:"
+        }
+    ]).then((answer) => {
+      //!bottom of array of objects
+        // Call the function to add department input to the database
+        addRoleToDatabase(answer.roleName, answer.salary, answer.departmentId);
+    });
+}
 
 
 
