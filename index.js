@@ -184,21 +184,23 @@ function takeAddEmployeeInput() {
             message: "Enter the employees role:"
         },
         {
-            name: "employeeManager",
+            name: "manager_id",
             type: "input",
             message: "Enter the manager that the employee reports to:"
         }
     ]).then((answer) => {
       //!bottom of add an employee array of objects
         // Call the function to add employee input to the database
-        takeAddEmployeeInput(answer.firstName, answer.lastName, answer.employeeRole, answer.employeeManager);
+        takeAddEmployeeInput(answer.firstName, answer.lastName, answer.employeeRole, answer.manager_id);
     });
 }
 
 //! Function to add add employee data input to the database
-function takeAddEmployeeInput(firstName, lastName, employeeRole, employeeManager) {
-    const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES 
-    ('${firstName}', '${lastName}', '${employeeRole}', '${employeeManager});`
+function takeAddEmployeeInput(firstName, lastName, employeeRole, manager_id) {
+    const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) 
+    VALUES 
+    ('${firstName}', '${lastName}', '${employeeRole}', '${manager_id}');`
+   
     db.query(sql,  (err, res) => {
         if (err) {
             console.log(err);
