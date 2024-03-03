@@ -78,17 +78,7 @@ function viewAllEmployees () {
 }
 //example
 questionAnsweredThenWhat();
-// function addOne(number) {
-//   number++;
-//   return number;
-// }
 
-// let numeroUno = 1;
-
-// addOne(numerUno).then((numeroTwo) => {
-//   console.log(numerTwo);
-// });
-// let numeroThree = addOne(2);
 //* 1. mysql terminal (open the integrated terminal)
 //* 2. ensure connection matches what mysql is
 //* 3. select * from to check all tables are working 
