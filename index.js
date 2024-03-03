@@ -89,7 +89,7 @@ questionAnsweredThenWhat();
 // WHEN I choose to add a department
 // THEN I am prompted to enter the name of the department and that department is added to the 
 //! Function to take department input
-function takeDepartmentInput() {
+function takeDepartmentInput(answer) {
     inquirer.prompt([
         {
             name: "departmentName",
@@ -104,7 +104,7 @@ function takeDepartmentInput() {
 
 //! Function to add department input to the database
 function addDepartmentToDatabase(departmentName) {
-    const sql = 'INSERT INTO department (departmentName) VALUES (?)';
+    const sql = 'INSERT INTO department (id),(departmentName) VALUES ();
     db.query(sql, [departmentName], (err, res) => {
         if (err) {
             console.log(err);
