@@ -48,6 +48,8 @@ function questionAnsweredThenWhat() {
           takeRoleInput();
         } else if (answers.doWhat === 'Add A Employee') {
            takeAddEmployeeInput();
+        } else if (answers.doWhat === 'Update an Employee Role') {
+          updateEmployeeNewRole();
         }
         else {
             // Handle other actions here
@@ -181,15 +183,15 @@ function takeAddEmployeeInput() {
     ]).then((answer) => {
       //!bottom of add an employee array of objects
         // Call the function to add employee input to the database
-        takeAddEmployeeInput(answer.firstName, answer.lastName, answer.employeeRole, answer.managerId);
+        takeAddEmployeeInputDb(answer.firstName, answer.lastName, answer.employeeRole, answer.managerId);
     });
 }
 
 //! Function to add add employee data input to the database
-function takeAddEmployeeInput(firstName, lastName, employeeRole, managerId) {
-    const sql = `INSERT INTO employee (first_name, last_name, role_id, managerId) 
+function takeAddEmployeeInputDb(firstName, lastName, employeeRole, managerId) {
+    const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) 
     VALUES 
-    ('${firstName}', '${lastName}', '${employeeRole}', '${manager_id}');`
+    ('${firstName}', '${lastName}', '${employeeRole}', '${managerId}');`
    
     db.query(sql,  (err, res) => {
         if (err) {
@@ -200,24 +202,41 @@ function takeAddEmployeeInput(firstName, lastName, employeeRole, managerId) {
     });
 }
 
-
-
-// Add an if-else statement in the main function
-// Create a function to add Employee
-// Call the addEmployee function inside the if-else statement
-// Inside addEmployee Function, you will create one more inquirer.prompt to ask the details of the employee to be added i.e first_name, last_name, role_id and manage_id
-// Make use of the insert command in the sql to insert data in the database
-
-
-// Functionality which involves updating already existing data to in the table
-//!update
+//! Functionality which involves updating already existing data to in the table
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
-// Add an if-else statement in the main function
-// Create a function to update Employee
-// Call the updateEmployee function inside the if-else statement
-// Inside updateEmployee Function, you will create one more inquirer.prompt to ask the details of the employee to update
-// Make use of the update command in the sql to update data in the database
+//! Function to update Employees new Role
+function updateEmployeeNewRole() {
+    inquirer.prompt([
+        {
+            name: "employeeId",
+            type: "input",
+            message: "Provide the employee ID whose role you would like to update :"
+        },
+        {
+            name: "roleId",
+            type: "input",
+            message: "Provide the ID of the role you would like this employee to have:"
+        }
+        
+    ]).then((answer) => {
+      //!bottom of update  new role objects
+        // Call the function to add employee input to the database
+        updateEmployeeNewRoleDB(answer.employeeId, answer.roleId);
+    });
+}
 
-//! update records in db
+//! Function to add updates employee role data input to the database
+function updateEmployeeNewRoleDB(employeeId, roleId) {
+    const sql = `UPDATE employee SET role_id = '${roleId}' 
+    WHERE id = '${employeeId}' `
+  
+    db.query(sql,  (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(`Role '${employeeId}' added successfully!`);
+        }
+    });
+}
