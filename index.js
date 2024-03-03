@@ -186,9 +186,9 @@ function takeAddEmployeeInput() {
             message: "Enter the manager that the employee reports to:"
         }
     ]).then((answer) => {
-      //!bottom of array of objects
-        // Call the function to add department input to the database
-        addRoleToDatabase(answer.roleName, answer.salary, answer.departmentId);
+      //!bottom of add an employee array of objects
+        // Call the function to add employee input to the database
+        takeAddEmployeeInput(answer.firstName, answer.lastName, answer.employeeRole, answer.employeesManager);
     });
 }
 
