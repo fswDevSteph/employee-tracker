@@ -41,7 +41,16 @@ function questionAnsweredThenWhat() {
      viewAllRoles()
     } else if (answers.doWhat == 'View All Employees') {
       viewAllEmployees()
-    }
+    } else if (answers.doWhat === 'Add A Department') {
+     // Call the function to take department input
+     takeDepartmentInput();
+        } else if( answers.doWhat === 'Add A Role' ) {
+          takeRoleInput();
+        }
+        else {
+            // Handle other actions here
+            console.log("Not yet implemented.");
+        } 
 
   });
 }
@@ -85,11 +94,10 @@ questionAnsweredThenWhat();
 
 
 // Functionality which involves adding data to table
-
 // WHEN I choose to add a department
 // THEN I am prompted to enter the name of the department and that department is added to the 
 //! Function to take department input
-function takeDepartmentInput(answer) {
+function takeDepartmentInput() {
     inquirer.prompt([
         {
             name: "departmentName",
@@ -104,8 +112,8 @@ function takeDepartmentInput(answer) {
 
 //! Function to add department input to the database
 function addDepartmentToDatabase(departmentName) {
-    const sql = 'INSERT INTO department (id),(departmentName) VALUES ();
-    db.query(sql, [departmentName], (err, res) => {
+    const sql = `INSERT INTO department (departmentName) VALUES ('${departmentName}');`
+    db.query(sql,  (err, res) => {
         if (err) {
             console.log(err);
         } else {
@@ -113,21 +121,49 @@ function addDepartmentToDatabase(departmentName) {
         }
     });
 }
-inquirer.prompt(question).then((answers) => {
-        if (answers.doWhat === 'Add A Department') {
-            // Call the function to take department input
-            takeDepartmentInput();
-        } else {
-            // Handle other actions here
-            console.log("Not yet implemented.");
-        }
-    });
-
 
 // WHEN I choose to add a role
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+//! Function to take role input
+function takeRoleInput() {
+    inquirer.prompt([
+        {
+            name: "roleName",
+            type: "input",
+            message: "Enter the name of the role:"
+        },
+        {
+            name: "salary",
+            type: "input",
+            message: "Enter the salary of the role:"
+        },
+        {
+            name: "departmentId",
+            type: "input",
+            message: "Enter department ID:"
+        },
+    ]).then((answer) => {
+      //!bottom of array of objects
+        // Call the function to add department input to the database
+        addRoleToDatabase(answer.roleName, answer.salary, answer.departmentId);
+    });
+}
+
+//! Function to add role input to the database
+function addRoleToDatabase(roleName, salary, departmentId) {
+    const sql = `INSERT INTO role (title, salary, department_id) VALUES ('${roleName}', '${salary}', '${departmentId}');`
+    db.query(sql,  (err, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(`Role '${roleName}' added successfully!`);
+        }
+    });
+}
 // WHEN I choose to add an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+
+
 
 // Add an if-else statement in the main function
 // Create a function to add Employee
@@ -137,7 +173,7 @@ inquirer.prompt(question).then((answers) => {
 
 
 // Functionality which involves updating already existing data to in the table
-
+//!update
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
@@ -147,3 +183,4 @@ inquirer.prompt(question).then((answers) => {
 // Inside updateEmployee Function, you will create one more inquirer.prompt to ask the details of the employee to update
 // Make use of the update command in the sql to update data in the database
 
+//! update records in db
