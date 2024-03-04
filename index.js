@@ -236,7 +236,7 @@ function updateEmployeeNewRoleDB(employeeId, roleId) {
         if (err) {
             console.log(err);
         } else {
-            console.log(`Role '${employeeId}' added successfully!`);
+            console.log(`Role '${employeeId}' has been added to the employee successfully!`);
         }
     });
 }
