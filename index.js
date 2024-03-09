@@ -31,36 +31,33 @@ const question = [
   },
 ];
 
-
-//function for when a selection is made
+//function for when a selction is made
 function questionAnsweredThenWhat() {
-    inquirer.prompt(question).then((answers) => {
-        //.then RECEIVES the return value of a promise and uses it as the arg value (answers)
-        if (answers.doWhat == 'View All Departments') {
-            viewAllDepartments();
-        } else if (answers.doWhat == 'View All Roles') {
-            viewAllRoles();
-        } else if (answers.doWhat == 'View All Employees') {
-            viewAllEmployees();
-        } else if (answers.doWhat === 'Add A Department') {
-            // Call the function to take department input
-            takeDepartmentInput();
-        } else if (answers.doWhat === 'Add A Role') {
-            takeRoleInput();
+  inquirer.prompt(question).then((answers) => {
+    //.then RECIEVES the return value of a promise and uses it as the arg value (answers)
+    if (answers.doWhat == 'View All Departments') { // checking condition
+     viewAllDepartments() //calling that function
+    } else if (answers.doWhat == 'View All Roles') {
+     viewAllRoles()
+    } else if (answers.doWhat == 'View All Employees') {
+      viewAllEmployees()
+    } else if (answers.doWhat === 'Add A Department') {
+     // Call the function to take department input
+     takeDepartmentInput();
+        } else if( answers.doWhat === 'Add A Role' ) {
+          takeRoleInput();
         } else if (answers.doWhat === 'Add A Employee') {
-            takeAddEmployeeInput();
+           takeAddEmployeeInput();
         } else if (answers.doWhat === 'Update an Employee Role') {
-            updateEmployeeNewRole();
-        } else {
+          updateEmployeeNewRole();
+        }
+        else {
             // Handle other actions here
             console.log("Not yet implemented.");
-        }
+        } 
 
-        // After each operation is completed, prompt the user again
-        promptUser();
-    });
+  });
 }
-
 
 function viewAllDepartments () { 
       db.query('select * from department', (err, res) => {
