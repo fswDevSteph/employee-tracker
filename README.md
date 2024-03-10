@@ -7,7 +7,7 @@ N/A
 
 ## A video walk through
 
-Video: https://youtu.be/WzgcTnBzsjY 
+Video: https://youtu.be/Cem6MENDiwI 
 
 ## Repo:
 https://github.com/fswDevSteph/employee-tracker
