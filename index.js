@@ -62,13 +62,14 @@ function questionAnsweredThenWhat() {
 function viewAllDepartments () { 
       db.query('select * from department', (err, res) => {
         console.table(res);
-      });
-}
+questionAnsweredThenWhat();
+})};
 
 function viewAllRoles () {
   db.query('select * from role', (err, res) => {
      if(err) console.log(err)    
     console.table(res);
+questionAnsweredThenWhat();
       });
 }
 
@@ -76,6 +77,7 @@ function viewAllEmployees () {
   db.query('select employee.id, first_name, last_name, title, salary, departmentName FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id;', (err, res) => {
         if(err) console.log(err)
         console.table(res);
+    questionAnsweredThenWhat();
       });
 }
 //example
@@ -113,6 +115,7 @@ function addDepartmentToDatabase(departmentName) {
         } else {
             console.log(`Department '${departmentName}' added successfully!`);
         }
+        questionAnsweredThenWhat(); //! this is the 
     });
 }
 
@@ -153,6 +156,7 @@ function addRoleToDatabase(roleName, salary, departmentId) {
         } else {
             console.log(`Role '${roleName}' added successfully!`);
         }
+        questionAnsweredThenWhat()
     });
 }
 // WHEN I choose to add an employee
@@ -199,6 +203,7 @@ function takeAddEmployeeInputDb(firstName, lastName, employeeRole, managerId) {
         } else {
             console.log(`Role '${firstName}' added successfully!`);
         }
+        questionAnsweredThenWhat();
     });
 }
 
@@ -238,5 +243,6 @@ function updateEmployeeNewRoleDB(employeeId, roleId) {
         } else {
             console.log(`Role '${employeeId}' has been added to the employee successfully!`);
         }
+        questionAnsweredThenWhat();
     });
 }
